@@ -1,0 +1,45 @@
+import express from "express";
+import roles from "./roles/rolesRouter.js";
+import users from "./users/usersRouter.js";
+import { deptRouter } from "./departments/departmentRouter.js";
+import { empRouter } from "../src/employee/employeeRouter.js";
+import { designationRouter } from "./designations/designationRouter.js";
+import projectModels from "../src/models/projectModelRouter.js";
+import * as auths from "../middlewares/auth.js";
+import assignRouter from "../src/assignService/assignRouter.js";
+import { leaveTypeRouter } from "./leaveTypes/leaveTypeRouter.js";
+import { leaveRouter } from "./leaveApplied/leaveAppliedRouter.js";
+import { projectRouter } from "./projects/projectsRouter.js";
+import { taskRouter } from "./tasks/taskRouter.js";
+import employemangement from "./employeeManage/employeeManagementRouter.js";
+import attendance from "./attendance/attendanceRouter.js";
+import { interviewRouter } from "./interview/interviewRouter.js";
+import { joiningRouter } from "./joining/joiningRouter.js";
+import { filesRouter } from "./files/filesRouter.js";
+import { jobsRouter } from "./jobs/jobsRouter.js";
+import breaks from "./breaks/breaksRouter.js";
+import shifts from './shift/shiftRouter.js';
+
+const router = express();
+
+router.use("/users", users);
+router.use("/roles", auths.auth, roles);
+router.use("/project/model", auths.auth, projectModels);
+router.use("/department", auths.auth, deptRouter);
+router.use("/designation", auths.auth, designationRouter);
+router.use("/employee", auths.auth, empRouter);
+router.use("/projects", auths.auth, projectRouter);
+router.use("/assign", auths.auth, assignRouter);
+router.use("/employeemanagement", auths.auth, employemangement);
+router.use("/leavetype", auths.auth, leaveTypeRouter);
+router.use("/leaveapplied", auths.auth, leaveRouter);
+router.use("/task", auths.auth, taskRouter);
+router.use("/interview",auths.auth,  interviewRouter);
+router.use("/joining",auths.auth, joiningRouter);
+router.use("/files", auths.auth, filesRouter);
+router.use("/attendance", auths.auth, attendance);
+router.use("/breaks", auths.auth, breaks);
+router.use("/jobs", auths.auth, jobsRouter);
+router.use("/shifts", auths.auth, shifts);
+
+export default router;
